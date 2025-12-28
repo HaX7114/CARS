@@ -2,28 +2,35 @@
 import { GoogleGenAI } from "@google/genai";
 import { Message } from "../types";
 
-// Always use const ai = new GoogleGenAI({apiKey: process.env.API_KEY}); strictly as per guidelines
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const getCarAdvice = async (history: Message[], userInput: string) => {
   try {
-    const chat = ai.chats.create({
+    const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
+      contents: userInput,
       config: {
+        tools: [{ googleSearch: {} }],
         systemInstruction: `You are LuxeDrive Concierge, an elite automotive expert for a futuristic car brand. 
         Our fleet: 
         1. Model Alpha: Luxury sedan, long range (405mi), 3.1s 0-60.
         2. Model Sigma: Practical SUV, spacious, 348mi range, 3.8s 0-60.
         3. Model Zenith: Hyper-performance sedan, 200mph top speed, 1.99s 0-60.
         
-        Keep responses concise, premium, and sophisticated. Recommend the best LuxeDrive model based on the user's lifestyle.`,
+        Keep responses concise, premium, and sophisticated. Recommend the best LuxeDrive model based on the user's lifestyle.
+        If you use Google Search to find external information (like charging stations or tax credits), ensure you provide a helpful summary.`,
       },
     });
 
-    const response = await chat.sendMessage({ message: userInput });
-    return response.text;
+    const text = response.text;
+    const sources = response.candidates?.[0]?.groundingMetadata?.groundingChunks?.map((chunk: any) => ({
+      title: chunk.web?.title,
+      uri: chunk.web?.uri
+    })).filter((s: any) => s.title && s.uri);
+
+    return { text, sources: sources || [] };
   } catch (error) {
     console.error("Gemini API Error:", error);
-    return "I'm currently recalibrating my neural links. Please try again in a moment, or visit our showroom.";
+    return { text: "I'm currently recalibrating my neural links. Please try again in a moment, or visit our showroom.", sources: [] };
   }
 };
