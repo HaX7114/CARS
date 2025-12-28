@@ -1,7 +1,5 @@
 {
   "name": "LuxeDrive | Elite Automotive Experience",
-  "description": "A high-performance automotive landing page featuring Google Search-powered AI concierge, cinematic parallax, and modern luxury aesthetics.",
-  "requestFramePermissions": [
-    "microphone"
-  ]
+  "description": "A high-performance automotive landing page featuring cinematic parallax and modern luxury aesthetics.",
+  "requestFramePermissions": []
 }

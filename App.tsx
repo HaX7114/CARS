@@ -1,9 +1,7 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, useSpring, useScroll } from 'framer-motion';
 import Navbar from './components/Navbar';
 import CarSection from './components/CarSection';
-import AIAssistant from './components/AIAssistant';
 import { CARS } from './constants';
 
 const CustomCursor: React.FC = () => {
@@ -154,8 +152,6 @@ const App: React.FC = () => {
           </footer>
         </section>
       </main>
-
-      <AIAssistant />
     </motion.div>
   );
 };
