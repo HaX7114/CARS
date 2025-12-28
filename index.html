@@ -1,10 +1,26 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="LuxeDrive - Elite Electric Performance & Luxury Mobility">
   <title>LuxeDrive | Electric Performance</title>
+  
+  <!-- GitHub Pages SPA Redirect Script -->
+  <script type="text/javascript">
+    (function(l) {
+      if (l.search[1] === '/' ) {
+        var decoded = l.search.slice(1).split('&').map(function(s) { 
+          return s.replace(/~and~/g, '&')
+        }).join('?');
+        window.history.replaceState(null, null,
+            l.pathname.slice(0, -1) + decoded + l.hash
+        );
+      }
+    }(window.location))
+  </script>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -16,9 +32,21 @@
       color: #fff;
       cursor: none; /* Hide default cursor for the custom one */
     }
+    
+    /* Hide scrollbar across all browsers */
     ::-webkit-scrollbar {
       width: 0px;
+      background: transparent;
     }
+    
+    .scrollbar-hide {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none; /* Chrome, Safari and Opera */
+    }
+
     .snap-container {
       scroll-snap-type: y mandatory;
       overflow-y: scroll;
