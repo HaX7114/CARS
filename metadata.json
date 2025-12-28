@@ -1,0 +1,7 @@
+{
+  "name": "LuxeDrive - Future of Mobility",
+  "description": "A high-end, modern automotive e-commerce landing page inspired by Tesla, featuring parallax effects, smooth animations, and an AI-powered concierge for personalized car recommendations.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
