@@ -4,38 +4,6 @@ import Navbar from './components/Navbar';
 import CarSection from './components/CarSection';
 import { CARS } from './constants';
 
-const CustomCursor: React.FC = () => {
-  const mouseX = useSpring(0, { stiffness: 500, damping: 28 });
-  const mouseY = useSpring(0, { stiffness: 500, damping: 28 });
-  const scale = useSpring(1, { stiffness: 500, damping: 28 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseX.set(e.clientX - 10);
-      mouseY.set(e.clientY - 10);
-    };
-
-    const handleMouseDown = () => scale.set(1.5);
-    const handleMouseUp = () => scale.set(1);
-
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mousedown', handleMouseDown);
-    window.addEventListener('mouseup', handleMouseUp);
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mousedown', handleMouseDown);
-      window.removeEventListener('mouseup', handleMouseUp);
-    };
-  }, [mouseX, mouseY, scale]);
-
-  return (
-    <motion.div 
-      className="custom-cursor hidden md:block"
-      style={{ x: mouseX, y: mouseY, scale }}
-    />
-  );
-};
-
 const App: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -79,8 +47,6 @@ const App: React.FC = () => {
       transition={{ duration: 1.5 }}
       className="bg-black text-white selection:bg-white selection:text-black overflow-hidden"
     >
-      <CustomCursor />
-      
       {/* Page Progress Indicator */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-white z-[100] origin-left"

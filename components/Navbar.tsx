@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 
 const Navbar: React.FC = () => {
-  const navItems = ['Model Alpha', 'Model Sigma', 'Model Zenith', 'Inventory'];
+  const navItems = ['Tesla', 'AMG', 'BMW 7', 'Inventory'];
   
   return (
     <motion.nav 
